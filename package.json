@@ -1,0 +1,30 @@
+{
+  "name": "musklines",
+  "version": "1.0.0",
+  "description": "Simple blockchain node.js implementation try",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "node index.js",
+    "lint": "eslint --fix --ext .js,.jsx ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CelsoUliana/Musklines.git"
+  },
+  "author": "Celso Uliana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CelsoUliana/Musklines/issues"
+  },
+  "homepage": "https://github.com/CelsoUliana/Musklines#readme",
+  "dependencies": {
+    "js-sha256": "^0.9.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "eslint": "^7.18.0"
+  }
+}
