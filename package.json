@@ -2,29 +2,42 @@
   "name": "musklines",
   "version": "1.0.0",
   "description": "Simple blockchain node.js implementation try",
-  "main": "index.js",
+  "main": "./src/main.ts",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "node index.js",
-    "lint": "eslint --fix --ext .js,.jsx ."
+    "start": "node dist/main.js",
+    "webpack": "webpack",
+    "lint": "eslint --fix --ext .js,.jsx, ."
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CelsoUliana/Musklines.git"
   },
-  "author": "Celso Uliana",
+  "author": {
+    "name": "Celso Uliana",
+    "email": "celso.a.u@gmail.com"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/CelsoUliana/Musklines/issues"
   },
   "homepage": "https://github.com/CelsoUliana/Musklines#readme",
   "dependencies": {
-    "js-sha256": "^0.9.0"
+    "source-map-loader": "^2.0.1",
+    "ts-loader": "^8.0.17",
+    "tsconfig-paths": "^3.9.0",
+    "tscpaths": "0.0.9"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.168",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
     "@typescript-eslint/parser": "^4.14.1",
-    "eslint": "^7.18.0"
+    "eslint": "^7.18.0",
+    "rimraf": "^3.0.2",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.5",
+    "webpack": "^5.21.2",
+    "webpack-cli": "^4.5.0",
+    "webpack-node-externals": "^2.5.2"
   }
 }
