@@ -68,7 +68,7 @@ export class Blockchain{
 		})
 	}
 
-	public lastBlock(){
+	public async lastBlock(){
 		return this.chain[this.chain.length - 1]
 	}
 

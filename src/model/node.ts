@@ -1,4 +1,4 @@
-import { createHash } from 'crypto'
+import { sha256 } from 'js-sha256'
 import { Transaction } from './transactions'
 
 /*
@@ -39,12 +39,12 @@ export class Node{
 		Also need to use proof as a nonce.
 	*/
 	private compute(){
-		/*let hash = createHash('sha256').update(this.index + 
-											   this.link  + 
-											   this.timestampString + 
-											   JSON.stringify(this.transactions).toString() +
-											   this.proof)*/
-		return "1"
-		//return hash.digest().toString()
+		let temp = sha256(	this.index + 
+							this.link  + 
+							this.proof +
+							this.timestampString + 
+							JSON.stringify(this.transactions).toString()
+						  )
+		return temp
 	}
 }
