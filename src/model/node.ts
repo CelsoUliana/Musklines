@@ -7,13 +7,12 @@ import { Transaction } from './transactions'
 */
 
 export class Node{
-
-	private index: number
-	private link: string
-	private hash: string
-	private proof: number
-	private timestampString: string
-	private transactions: Array<Transaction>
+	private readonly index: number
+	private readonly link: string
+	private readonly hash: string
+	private readonly nonce: number
+	private readonly timestampString: string
+	private readonly transactions: Array<Transaction>
 	/*
 		Link equals the previous block hash so as to mean a link in the chain.
 		Should have a Merkle tree root hash (used in Bitcoin) or Merkle Patricia tree hash (used in Ethereum) -
@@ -21,27 +20,27 @@ export class Node{
 		https://en.bitcoin.it/wiki/Block
 		https://en.bitcoin.it/wiki/Block_hashing_algorithm
 	*/
-	constructor(index: number, timestampString: string, transactions: Array<Transaction>, proof: number, link: string){
+	constructor(index: number, timestampString: string, transactions: Array<Transaction>, nonce: number, link: string){
 		this.link = link
 		this.index = index
-		this.proof = proof
-		this.timestampString = timestampString
+		this.nonce = nonce
 		this.transactions = transactions
+		this.timestampString = timestampString
 		this.hash = this.compute()
 	}
 
-	public getHash(){
+	public getHash(): string{
 		return this.hash
 	}
 
 	/*
-		Compute function should be used with another function that calculates a proof of work based on some criteria.
-		Also need to use proof as a nonce.
+		Compute function should be used with another function that calculates a nonce of work based on some criteria.
+		Also need to use nonce as a nonce.
 	*/
-	private compute(){
+	private compute(): string{
 		let temp = sha256(	this.index + 
 							this.link  + 
-							this.proof +
+							this.nonce +
 							this.timestampString + 
 							JSON.stringify(this.transactions).toString()
 						  )
