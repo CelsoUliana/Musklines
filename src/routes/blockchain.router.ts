@@ -15,10 +15,18 @@ export class BlockChainRouter{
     public Router(): Router{
         return this.router
     }
-
+    /*
+        Should be treated in a controller like class, but I have no ideia how to structure this thing right.
+    */
     private buildRoutes(): void{
-        this.router.get("/", async (req: Request, res: Response) => {
-            res.send(this.musklines.addTransaction(1337, '3l0n mu5k', 'random guy on tt').toString())
+        this.router.post("/addTransaction", async (req: Request, res: Response) => {
+            const {amount, sender, receiver} = req.body
+            res.send(this.musklines.addTransaction(amount, sender, receiver).toString())
+        })
+
+        this.router.post("/consesus", async (req: Request, res: Response) => {
+            let blockchain = new Blockchain().deserialize(req.body)
+            res.send({'replaced' : await this.musklines.consensus(blockchain)})
         })
         
         this.router.get("/mine", async (req: Request, res: Response) => {
@@ -27,7 +35,7 @@ export class BlockChainRouter{
         })
         
         this.router.get("/print", async (req: Request, res: Response) => {
-           this.musklines.printChain()
+           //this.musklines.printChain()
            res.json(this.musklines)
         })
     }

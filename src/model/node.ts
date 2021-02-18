@@ -7,12 +7,12 @@ import { Transaction } from './transactions'
 */
 
 export class Node{
-	private readonly index: number
-	private readonly link: string
-	private readonly hash: string
-	private readonly nonce: number
-	private readonly timestampString: string
-	private readonly transactions: Array<Transaction>
+	private index: number
+	private link: string
+	private hash: string
+	private nonce: number
+	private timestampString: string
+	private transactions: Array<Transaction>
 	/*
 		Link equals the previous block hash so as to mean a link in the chain.
 		Should have a Merkle tree root hash (used in Bitcoin) or Merkle Patricia tree hash (used in Ethereum) -
@@ -27,6 +27,18 @@ export class Node{
 		this.transactions = transactions
 		this.timestampString = timestampString
 		this.hash = this.compute()
+	}
+
+	public static pseudoConstructor(index: number, timestampString: string, transactions: Array<Transaction>, nonce: number, link: string, hash:string): Node{
+		let node = new Node(index, timestampString, transactions, nonce, link)
+		node.setHash(hash)
+		return node
+	}
+	/*
+		Workaround for deserialize.
+	*/
+	private setHash(hash: string){
+		this.hash = hash
 	}
 
 	public getHash(): string{
