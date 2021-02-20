@@ -1,4 +1,4 @@
-import express from "express"
+import express from 'express'
 import { BlockChainRouter } from './routes/blockchain.router'
 
 let router = new BlockChainRouter()
@@ -13,5 +13,5 @@ app.use(router.Router())
     But I am confused as heck right now.
 */
 app.listen(8000, () => {
-    console.log('Listening on port 8000')
+	console.log('Musklines blockchain is running')
 })

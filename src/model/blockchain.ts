@@ -21,7 +21,7 @@ export class Blockchain implements Serializable<Blockchain>{
 		Literature calls the first block genesis block, so shall I.
 	*/	
 	private startChain(): Node{
-		return new Node(0, new Date().toISOString(), new Array<Transaction>(new Transaction(0, 1, '3l0n mu5k', 'me', 'Genesis block')), 1337, '0')
+		return new Node(0, new Date().toISOString(), new Array<Transaction>(new Transaction(0, 1000, 'Genesis reward', 'me', 'Genesis block')), 1337, '0')
 	}
 
 	/*
@@ -39,9 +39,11 @@ export class Blockchain implements Serializable<Blockchain>{
 			if(sender !== undefined && receiver !== undefined){
 				let newTransaction = new Transaction(this.onHoldTransactions.length, transaction, sender, receiver, message)
 				newTransaction.encryptData(keys.encrypt(newTransaction))
+				/*
 				let text = this.verifyTransaction(newTransaction, keys)
 				console.log(text)
 				console.log(newTransaction.TransactionToString())
+				*/
 				return this.onHoldTransactions.push(newTransaction)
 			}
 		}
@@ -116,12 +118,10 @@ export class Blockchain implements Serializable<Blockchain>{
 	}
 
 	public async consensus(blockchain: Blockchain): Promise<boolean>{
-		console.log(await this.size())
-		console.log(await blockchain.size())
 		if(await blockchain.size() > await this.size()){
 			this.chain = blockchain.chain
-			this.onHoldTransactions = blockchain.onHoldTransactions
 			this.difficulty = blockchain.difficulty
+			this.onHoldTransactions = blockchain.onHoldTransactions
 			return true
 		}
 		return false
@@ -133,9 +133,9 @@ export class Blockchain implements Serializable<Blockchain>{
 	deserialize(input: any) {
         let chain = new Array<Node>()
 
-		input.chain.forEach(node => {
+		input.chain.forEach((node: any) => {
 			let arrTs = new Array<Transaction>()
-			node.transactions.forEach(ts => {
+			node.transactions.forEach((ts: any) => {
 				let trans: Transaction
 				if(ts.description === undefined){
 					trans = new Transaction(ts.index, ts.amount, ts.sender, ts.receiver)
@@ -153,7 +153,7 @@ export class Blockchain implements Serializable<Blockchain>{
 		})
 
 		let arrTs = new Array<Transaction>()
-		input.onHoldTransactions.forEach(ts => {
+		input.onHoldTransactions.forEach((ts: any) => {
 			let trans: Transaction
 			if(ts.description === undefined){
 				trans = new Transaction(ts.index, ts.amount, ts.sender, ts.receiver)

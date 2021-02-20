@@ -34,6 +34,7 @@ export class Node{
 		node.setHash(hash)
 		return node
 	}
+	
 	/*
 		Workaround for deserialize.
 	*/
